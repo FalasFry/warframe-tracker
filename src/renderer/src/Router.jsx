@@ -2,6 +2,7 @@ import { createHashRouter } from "react-router-dom";
 import App from "./app";
 import Wishlist from "./Wishlist";
 import SearchPage from "./SearchPage";
+import WorldState from "./WorldState";
 
 const router = createHashRouter([
 {
@@ -9,17 +10,22 @@ const router = createHashRouter([
   element: <App />,
   children: [
   {
-      path: "*",
-      element: <p>Page Not Found</p>
+    path: "*",
+    element: <p>Page Not Found</p>
   },
   {
     index: true,
+    element: <WorldState />
+  },
+  {
+    path: "search",
     element: <SearchPage />
   },
   {
     path: "wishlist",
     element: <Wishlist />
   },
+
 
   ] 
 },]);

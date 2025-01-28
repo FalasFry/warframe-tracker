@@ -2,12 +2,12 @@ class FileOperations{
     constructor(){
       this.directoryPath = 'wishlist';
     }
-    handleSaveData(wishlist){
-      const filePath = `${this.directoryPath}/wishlist.json`;
-      window.api.saveDataToFile(wishlist, this.directoryPath ,filePath);
+    handleSaveData(data, filename){
+      const filePath = `${this.directoryPath}/${filename}.json`;
+      window.api.saveDataToFile(data, this.directoryPath ,filePath);
     };
-    handleLoadData() {
-      const filePath = `${this.directoryPath}/wishlist.json`
+    handleLoadData(filename) {
+      const filePath = `${this.directoryPath}/${filename}.json`
       return window.api.loadDataFromFile(filePath);
     };
 };

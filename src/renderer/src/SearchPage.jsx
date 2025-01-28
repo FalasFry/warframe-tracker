@@ -4,8 +4,6 @@ import FileOperations from "./components/FileOperations";
 
 function SearchPage(){
 
-  const [ warframeData, setWarframeData ] = useState();
-  const [ weaponData, setWeaponData ] = useState();
   const [ searchData, setSearchData ] = useState('');
   const [ searchCategory, setSearchCategory ] = useState();
 
@@ -23,16 +21,16 @@ function SearchPage(){
 
   const usefullData = [];
 
+  /*
   useEffect(() => {
-    if(allData) return;
+    if(Object.keys(allData).length === 0) return;
+    console.log(allData);
     fetch('https://api.warframestat.us/items')
     .then(response => response.json())
     .then(data => setAllData(data))
     .catch(error => console.log(error));
-
   }, [])
-
-
+  */
 
   if(allData){
     for(let i = 0; i < allData.length; i++){
@@ -106,8 +104,11 @@ function SearchPage(){
           <button onClick={() => filter('Melee')}>Melee</button>
           <button onClick={() => filter('Warframes')}>Warframes</button>
           <button onClick={handleWishlistClick}>WISHLIST</button>
+          <button onClick={() => navigate("/")}>Home</button>
       </nav>
-
+      <div>
+        <h1>Search</h1>
+      </div>
       <div className="gridContainer">
         {usefullData && usefullData.filter(item => searchCategory ? item.category.toLowerCase() === searchCategory.toLowerCase() : item)
         .filter(item => item.name.toLowerCase().includes(searchData.toLowerCase())).map(item => {

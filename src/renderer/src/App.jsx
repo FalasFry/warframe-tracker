@@ -1,26 +1,39 @@
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom";
 import FileOperations from "./components/FileOperations";
 
 function App() {
 
-  const [ allData, setAllData ] = useState();
+  const [ allData, setAllData ] = useState([]);
   const [ wishlist, setWishlist ] = useState([]);
 
   useEffect(() => {
     let fileOp = new FileOperations();
     let loadWishlist;
+    let loadAllData;
     try{
-       loadWishlist = fileOp.handleLoadData();
+      loadWishlist = fileOp.handleLoadData("wishlist");
     }
     catch(error){
       try{
-        fileOp.handleSaveData([]);
+        fileOp.handleSaveData([], "wishlist");
       }
       catch(error){
         console.error(error);
       }
     }
+    try{
+      loadAllData = fileOp.handleLoadData("allData");
+    }
+    catch(error){
+      try{
+        fileOp.handleSaveData([], "allData");
+      }
+      catch(error){
+        console.error(error);
+      }
+    }
+    setAllData(loadAllData);
     setWishlist(loadWishlist);
   }, []);
 
@@ -28,7 +41,8 @@ function App() {
     const handleBeforeUnload = (event) => {
       const fileOp = new FileOperations();
       try {
-        fileOp.handleSaveData(wishlist);
+        fileOp.handleSaveData(wishlist, "wishlist");
+        fileOp.handleSaveData(allData, "allData");
       } catch (error) {
         console.error(error);
       }
@@ -39,7 +53,7 @@ function App() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [wishlist]);
+  }, [wishlist, allData]);
 
   return (
     <> 

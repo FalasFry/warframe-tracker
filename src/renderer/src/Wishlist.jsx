@@ -14,7 +14,7 @@ function Wishlist(){
 
   const navigate = useNavigate();
   const handleSearchClick = () => {
-    navigate('/');
+    navigate('/search');
   };
 
   const removeFromWishlist = (item) => {
@@ -56,6 +56,7 @@ function Wishlist(){
         <button onClick={() => filter('Melee')}>Melee</button>
         <button onClick={() => filter('Warframes')}>Warframes</button>
         <button onClick={handleSearchClick}>SEARCH</button>
+        <button onClick={() => navigate("/")}>Home</button>
       </nav>
       <div>
         <h1>Wishlist</h1>
