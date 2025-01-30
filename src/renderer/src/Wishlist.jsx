@@ -76,11 +76,13 @@ function Wishlist(){
         .filter(item => item.name.toLowerCase().includes(searchData.toLowerCase()))
         .map(item => {
           return(
-            <div key={item.name+Math.random()} className="clickablegridItem" onClick={() => handleClickingDiv(item)}>
-              <div className="content">
-                {item.name}
-                <p>{item.components.filter(i => i.done).length +' / '+item.components.length}</p>
-                <img src={item.wikiaThumbnail ? item.wikiaThumbnail.split('revision')[0] : null}/>
+            <div className="clickablegridItem">
+              <div key={item.name+Math.random()} onClick={() => handleClickingDiv(item)}>
+                <div className="content">
+                  {item.name}
+                  <p>{item.components.filter(i => i.done).length +' / '+item.components.length}</p>
+                  <img src={item.wikiaThumbnail ? item.wikiaThumbnail.split('revision')[0] : null}/>
+                </div>
               </div>
               <button onClick={() => removeFromWishlist(item)}>Remove</button>
             </div>

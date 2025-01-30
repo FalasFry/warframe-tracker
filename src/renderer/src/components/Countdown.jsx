@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Countdown = ({ targetDate, setUpdate }) => {
+const Countdown = ({ targetDate, onExpire }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
         let timeLeft = {};
@@ -11,25 +11,39 @@ const Countdown = ({ targetDate, setUpdate }) => {
                 minutes: Math.floor((difference / 1000 / 60) % 60),
                 seconds: Math.floor((difference / 1000) % 60)
             };
+        } else {
+            timeLeft = { expired: true };
         }
         return timeLeft;
     };
+
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    
     useEffect(() => {
-        const timer = setTimeout(() => {
-        setTimeLeft(calculateTimeLeft());
+        const timer = setInterval(() => {
+            const newTimeLeft = calculateTimeLeft();
+            setTimeLeft(newTimeLeft);
+
+            if (newTimeLeft.expired) {
+                clearInterval(timer);
+                if (onExpire) {
+                    onExpire();
+                }
+            }
         }, 1000);
-        return () => clearTimeout(timer);
-    });
+
+        return () => clearInterval(timer);
+    }, [targetDate, onExpire]);
+
     const timerComponents = [];
     Object.keys(timeLeft).forEach((interval) => {
         if (!timeLeft[interval]) {
-        return;
+            return;
         }
         timerComponents.push(
-        <span key={interval}>
-        {timeLeft[interval]} {interval}{" "}
-        </span>
+            <span key={interval}>
+                {timeLeft[interval]} {interval}{" "}
+            </span>
         );
     });
     return (
