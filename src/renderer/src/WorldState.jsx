@@ -23,13 +23,17 @@ function WorldState(){
         }
     };
 
-    const refresh = useCallback(() => {
+    setInterval(() => {
         fetchData();
+    }, 60000);
+
+    const refresh = useCallback(() => {
+        //fetchData();
     }, []);
 
 
     useEffect(() => {
-        fetchData();
+        fetchData();  
     }, []);
 
     const toggleVisibility = (tier) => {
@@ -44,6 +48,7 @@ function WorldState(){
             <nav className="stickyNavbar">
                 <button onClick={() => navigate("/wishlist")}>Wishlist</button>
                 <button onClick={() => navigate("/search")}>Items</button>
+                <button onClick={() => navigate("/mods")}>Mods</button>
                 <button>Fishing Help</button>
             </nav>
 
@@ -87,9 +92,10 @@ function WorldState(){
                         {worldState && worldState.nightwave.activeChallenges.map(challenge => {
                             return (
                                 <div key={challenge.id} className="nightwave-griditem">
-                                    <div className="nightwave-title">{challenge.title}</div>
-                                    <div className="nightwave-desc">{challenge.desc}</div>
-                                    <div className="nightwave-reputation">{challenge.reputation}</div>
+                                    <div>
+                                        <div className="nightwave-desc">{challenge.desc}</div>
+                                        <div className="nightwave-reputation">{challenge.reputation}</div>
+                                    </div>
                                 </div>
                             );
                         })}

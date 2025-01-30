@@ -7,7 +7,10 @@ function SearchPage(){
   const [ searchData, setSearchData ] = useState('');
   const [ searchCategory, setSearchCategory ] = useState();
 
-  const { allData, setAllData, wishlist, setWishlist } = useOutletContext();
+  const { wishlist, setWishlist } = useOutletContext();
+
+  const [ warframeData, setWarframeData ] = useState();
+  const [ weaponsData, setwWeaponsData ] = useState();
 
 
   const navigate = useNavigate();
@@ -21,22 +24,26 @@ function SearchPage(){
 
   const usefullData = [];
 
-  /*
+  
   useEffect(() => {
-    if(Object.keys(allData).length === 0) return;
-    console.log(allData);
-    fetch('https://api.warframestat.us/items')
+    fetch('https://api.warframestat.us/warframes/')
     .then(response => response.json())
-    .then(data => setAllData(data))
+    .then(data => setWarframeData(data))
     .catch(error => console.log(error));
-  }, [])
-  */
 
-  if(allData){
-    for(let i = 0; i < allData.length; i++){
-      let tmpItem = allData[i];
+    fetch('https://api.warframestat.us/weapons/')
+    .then(response => response.json())
+    .then(data => setwWeaponsData(data))
+    .catch(error => console.log(error));
+
+  }, [])
+  
+
+  if(warframeData){
+    for(let i = 0; i < warframeData.length; i++){
+      let tmpItem = warframeData[i];
       let prodCat = tmpItem.productCategory;
-      let regularCat = tmpItem.category;
+      
       switch(prodCat){
         case 'SpaceSuits': 
           tmpItem.category = 'Archwings';
@@ -52,6 +59,12 @@ function SearchPage(){
           break;
         default: break;
       }
+    }
+  }
+  if(weaponsData){
+    for(let i = 0; i < weaponsData.length; i++){
+      let tmpItem = weaponsData[i];
+      let regularCat = tmpItem.category;
       switch(regularCat){
         case 'Primary': 
           tmpItem.category = 'Primary';
@@ -68,13 +81,14 @@ function SearchPage(){
         default: break;
       }
     }
-    warframes.forEach(item => usefullData.push(item));
-    mechSuit.forEach(item => usefullData.push(item));
-    archwings.forEach(item => usefullData.push(item));
-    primary.forEach(item => usefullData.push(item));
-    secondary.forEach(item => usefullData.push(item));
-    melee.forEach(item => usefullData.push(item));
   }
+  warframes.forEach(item => usefullData.push(item));
+  mechSuit.forEach(item => usefullData.push(item));
+  archwings.forEach(item => usefullData.push(item));
+  primary.forEach(item => usefullData.push(item));
+  secondary.forEach(item => usefullData.push(item));
+  melee.forEach(item => usefullData.push(item));
+  
 
   const handleWishlistClick = () => {
     navigate('/wishlist');

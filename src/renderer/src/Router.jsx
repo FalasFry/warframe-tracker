@@ -3,6 +3,7 @@ import App from "./app";
 import Wishlist from "./Wishlist";
 import SearchPage from "./SearchPage";
 import WorldState from "./WorldState";
+import ModsPage from "./ModsPage";
 
 const router = createHashRouter([
 {
@@ -25,6 +26,10 @@ const router = createHashRouter([
     path: "wishlist",
     element: <Wishlist />
   },
+  {
+    path: "mods",
+    element: <ModsPage />
+  }
 
 
   ] 

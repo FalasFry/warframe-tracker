@@ -180,10 +180,14 @@ margin: 0 5px;
 }
 
 .nightwave-griditem {
+    display: flex;
     border: solid black 1px;
-    padding: 5px;
+    padding: 10px 0;
     border-radius: 5%;
     margin: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .world-state-container:last-child, .fissures-container:last-child {
