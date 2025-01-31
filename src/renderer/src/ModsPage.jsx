@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import './assets/modspage.css';
 
 function ModsPage(){
 

@@ -147,7 +147,6 @@ function FissureDisplay({worldState, tier}) {
         return (
             <div key={fissure.id} className="fissure-item">
                 <div className="fissure-node">{fissure.node}</div>
-                <div className="fissure-tier">{fissure.tier}</div>
                 <div className="fissure-mission">{fissure.missionType}</div>
                 <Countdown targetDate={fissure.expiry} />
             </div>
