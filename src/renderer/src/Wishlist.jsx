@@ -90,11 +90,13 @@ function Wishlist(){
         })}
       </div>
 
-      <SimpleModal isOpen={isModalOpen} onClose={closeModal}
-      clickedItem={clickedItem ? clickedItem : ''} 
-      setClickedItem={setClickedItem}
-      title={clickedItem ? clickedItem.name : ''}
-      data={clickedItem ? clickedItem.components : ''} 
+      <SimpleModal 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+        setClickedItem={setClickedItem}
+        title={clickedItem ? clickedItem.name : ''}
+        data={clickedItem ? clickedItem.components : ''}
+        type='item' 
       />
 
     </>

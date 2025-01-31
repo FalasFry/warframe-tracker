@@ -1,6 +1,6 @@
 import '../assets/modal.css';
 
-function SimpleModal({ clickedItem, setClickedItem, isOpen, onClose, title, data }){
+function SimpleModal({ setClickedItem, isOpen, onClose, title, data, type }){
     if (!isOpen) return null;
 
     const handleCheckbox = (e, item) => {
@@ -11,7 +11,6 @@ function SimpleModal({ clickedItem, setClickedItem, isOpen, onClose, title, data
           i.name === item.name ? {...i, done: e.target.checked} : i
         )
       }));
-      console.log(e.target.checked);
     };
     return (
       <>
@@ -23,7 +22,8 @@ function SimpleModal({ clickedItem, setClickedItem, isOpen, onClose, title, data
           <div className="modal-body">
             {data.map(item => {
               return(
-                  <div key={item.name+Math.random()} className="modal-content">
+                <>
+                  {type === "item" && <div key={item.name+Math.random()} className="modal-content">
                     <h4>
                       {item.name + ' x' + item.itemCount}
                     </h4>
@@ -48,8 +48,17 @@ function SimpleModal({ clickedItem, setClickedItem, isOpen, onClose, title, data
                         <label htmlFor={`doneCheckbox${item.name}`}>Done</label>
                       </div>
                     </div>
-                  </div>
-                )
+                  </div>}
+
+                  {type === "mod" && <div key={item.name+Math.random()} className="modal-content">
+                    <div className="drop-locations">
+                      <div>
+                        <p>{'Drops at '+item.location + ' ' +(item.chance*100) +'%'}</p>
+                      </div>
+                    </div>
+                  </div>}
+                </>
+              )
             })}
           </div>
         </div>
