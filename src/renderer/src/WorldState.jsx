@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react"
 import Countdown from "./components/Countdown";
+import './assets/worldState.css';
 
 function WorldState(){
 
@@ -100,6 +101,10 @@ function WorldState(){
                             );
                         })}
                     </div>
+                </div>
+
+                <div key='curcuit' className="curcuit-container">
+
                 </div>
             </div>
         </div>

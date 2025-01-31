@@ -1,3 +1,5 @@
+import '../assets/modal.css';
+
 function SimpleModal({ clickedItem, setClickedItem, isOpen, onClose, title, data }){
     if (!isOpen) return null;
 

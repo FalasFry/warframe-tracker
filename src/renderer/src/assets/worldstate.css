@@ -1,0 +1,90 @@
+.state-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding: 10px;
+}
+.world-state-container, .fissures-container, .nightwave-container {
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.world-state-container {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.fissures-container {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.nightwave-container {
+    grid-area: 2 / 1 / 3 / 3;
+}
+
+.nightwave-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.nightwave-griditem {
+    display: flex;
+    border: solid black 1px;
+    padding: 10px 0;
+    border-radius: 5%;
+    margin: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.world-state-container:last-child, .fissures-container:last-child {
+    margin-right: 0;
+}
+
+.world-state-item, .fissure-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.world-state-item:last-child, .fissure-item:last-child {
+    border-bottom: none;
+}
+
+.world-state-item h3, .world-state-item h4, .world-state-item h5, .fissure-node, .fissure-tier, .fissure-mission, .fissure-storm {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.fissure-tier {
+    margin-bottom: 10px;
+}
+
+.fissure-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.fissure-content {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: none;
+}
+
+.fissure-content.show {
+    display: block;
+}
