@@ -7,6 +7,8 @@ An Electron application with React
 - Search For Weapons & Frames
 - Add things to wishlist
 - Check off what parts of a wishlisted item you own
+- See the current relics
+- See the current curcuit rotations
 
 ## ToDo
 
