@@ -28,11 +28,6 @@ function WorldState(){
         fetchData();
     }, 60000);
 
-    const refresh = useCallback(() => {
-        //fetchData();
-    }, []);
-
-
     useEffect(() => {
         fetchData();  
     }, []);
@@ -64,7 +59,7 @@ function WorldState(){
                                     <h3>{state[0].split('Cycle').join(' cycle')}</h3>
                                     <h5>
                                         {'Cycle: ' + state[1].state}
-                                        <Countdown targetDate={state[1].expiry} onExpire={refresh}/>
+                                        <Countdown targetDate={state[1].expiry}/>
                                     </h5>
                                 </div>
                             );
@@ -81,7 +76,7 @@ function WorldState(){
                                 <span>{visibleTiers[tier] ? '-' : '+'}</span>
                             </div>
                             <div className={`fissure-content ${visibleTiers[tier] ? 'show' : ''}`}>
-                                {worldState && <FissureDisplay worldState={worldState} tier={tier} refresh={refresh} />}
+                                {worldState && <FissureDisplay worldState={worldState} tier={tier}/>}
                             </div>
                         </div>
                     ))}
@@ -103,8 +98,38 @@ function WorldState(){
                     </div>
                 </div>
 
-                <div key='curcuit' className="curcuit-container">
+                <div key='circuit' className="circuit-container">
+                    <h3>The Circuit</h3>
+                    <div>
+                        {worldState && worldState.duviriCycle.choices.map(choice => {
+                            return(
+                                <>
+                                    <h4>{choice.category}</h4>
+                                    <div className="circuit-option">
+                                        {choice.choices.map(option => {
+                                            return(
+                                                <div className="circuit-optionitem">
+                                                    {choice.category === 'hard' ? <h6>{option +' Incarnon Adapter'}</h6> : <h6>{option}</h6>}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </>
+                            );
+                        })}
+                    </div>
+                </div>
 
+                <div key='news' className="news-container">
+                    <h3>News</h3>
+                    {worldState && worldState.news.toReversed().map(article => {
+                        return(
+                            <div key={article.id} className="news-item">
+                                <h4>{article.message}</h4>
+                                <h6>{article.link}</h6>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
@@ -112,7 +137,7 @@ function WorldState(){
 }
 export default WorldState;
 
-function FissureDisplay({worldState, tier, refresh}) {
+function FissureDisplay({worldState, tier}) {
     return worldState.fissures
     .sort((a, b) => a.tierNum - b.tierNum)
     .filter(fissure => fissure.tier.toLowerCase() === tier.toLowerCase())
@@ -124,7 +149,7 @@ function FissureDisplay({worldState, tier, refresh}) {
                 <div className="fissure-node">{fissure.node}</div>
                 <div className="fissure-tier">{fissure.tier}</div>
                 <div className="fissure-mission">{fissure.missionType}</div>
-                <Countdown targetDate={fissure.expiry} onExpire={refresh} />
+                <Countdown targetDate={fissure.expiry} />
             </div>
         );
     });

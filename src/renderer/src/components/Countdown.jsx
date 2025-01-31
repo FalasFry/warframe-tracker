@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Countdown = ({ targetDate, onExpire }) => {
+const Countdown = ({ targetDate }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
         let timeLeft = {};
@@ -26,14 +26,11 @@ const Countdown = ({ targetDate, onExpire }) => {
 
             if (newTimeLeft.expired) {
                 clearInterval(timer);
-                if (onExpire) {
-                    onExpire();
-                }
             }
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [targetDate, onExpire]);
+    }, [targetDate]);
 
     const timerComponents = [];
     Object.keys(timeLeft).forEach((interval) => {

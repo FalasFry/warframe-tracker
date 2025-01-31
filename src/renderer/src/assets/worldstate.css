@@ -6,7 +6,7 @@
     grid-row-gap: 0px;
     padding: 10px;
 }
-.world-state-container, .fissures-container, .nightwave-container {
+.world-state-container, .fissures-container, .nightwave-container, .circuit-container, .news-container {
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -23,10 +23,12 @@
 
 .nightwave-container {
     grid-area: 2 / 1 / 3 / 3;
+
 }
 
 .nightwave-grid {
     display: grid;
+    padding-top: 50px;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 0px;
@@ -44,11 +46,7 @@
     align-items: center;
 }
 
-.world-state-container:last-child, .fissures-container:last-child {
-    margin-right: 0;
-}
-
-.world-state-item, .fissure-item {
+.world-state-item, .fissure-item, .news-item {
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
@@ -63,7 +61,7 @@
 }
 
 .fissure-tier {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .fissure-header {
@@ -87,4 +85,29 @@
 
 .fissure-content.show {
     display: block;
+}
+
+.circuit-option {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.circuit-optionitem {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: solid rgb(151, 151, 151) 1px;
+    border-radius: 5%;
+}
+
+.news-container {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 350px; /* Set your desired max height */
+}
+
+.news-item h4, .news-item h6 {
+    margin: 5px 0;
 }
