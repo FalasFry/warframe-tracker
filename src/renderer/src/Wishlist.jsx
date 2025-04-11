@@ -10,6 +10,8 @@ function Wishlist(){
   const [ searchCategory, setSearchCategory ] = useState();
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ clickedItem, setClickedItem ] = useState();
+
+  const imageUrl = 'https://wiki.warframe.com/images/';
   
 
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ function Wishlist(){
                 <div className="content">
                   {item.name}
                   <p>{item.components.filter(i => i.done).length +' / '+item.components.length}</p>
-                  <img src={item.wikiaThumbnail ? item.wikiaThumbnail.split('revision')[0] : null}/>
+                  <img src={item.name ? `${imageUrl}${item.name.split(' ').join('')}.png` : null}/>
                 </div>
               </div>
               <button onClick={() => removeFromWishlist(item)}>Remove</button>

@@ -12,6 +12,8 @@ function ModsPage(){
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const [ clickedItem, setClickedItem ] = useState();
 
+    const seen = new Set();
+
     useEffect(() => {
         fetch('https://api.warframestat.us/mods')
         .then(response => response.json())
@@ -36,6 +38,7 @@ function ModsPage(){
         setIsModalOpen(false);
     };
 
+
     return(
         <div>
             <nav className="stickyNavbar">
@@ -53,6 +56,13 @@ function ModsPage(){
                     .filter(mod => mod.name != 'Unfused Artifact')
                     .filter(mod => mod.drops)
                     .filter(mod => mod.name.toLowerCase().includes(searchData.toLowerCase()))
+                    .filter(mod => {
+                        if (seen.has(mod.name)){
+                            return false;
+                        } 
+                        seen.add(mod.name);                  
+                        return true;                         
+                    })
                     .map(mod => {
                         return (
                             <div>

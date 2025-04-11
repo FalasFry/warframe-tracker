@@ -9,6 +9,12 @@
     text-align: center;
     border: 1px solid rgba(121, 121, 121, 0.8);
 }
+
+.gridContainer img{
+  width: 200px;
+  height: 200px;
+}
+
 .clickablegridItem{
     cursor: pointer;
     padding: 5px;

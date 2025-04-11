@@ -1,6 +1,5 @@
 import { use, useEffect, useState } from "react"
 import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
-import FileOperations from "./components/FileOperations";
 
 function SearchPage(){
 
@@ -23,6 +22,8 @@ function SearchPage(){
   const mechSuit = [];
 
   const usefullData = [];
+
+  const imageUrl = 'https://wiki.warframe.com/images/';
 
   
   useEffect(() => {
@@ -131,7 +132,7 @@ function SearchPage(){
               <div className="content">
                 {item.name}
                 <p>{item.category}</p>
-                <img src={item.wikiaThumbnail ? item.wikiaThumbnail.split('revision')[0] : null}/>
+                <img src={item.name ? `${imageUrl}${item.name.split(' ').join('')}.png` : null}/>
               </div>
               {wishlist.includes(item) ? '' : <button onClick={() => addToWishlist(item)}>Add To Wishlist</button>}
             </div>
