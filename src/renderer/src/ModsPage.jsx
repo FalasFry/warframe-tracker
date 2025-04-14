@@ -13,6 +13,7 @@ function ModsPage(){
     const [ clickedItem, setClickedItem ] = useState();
 
     const seen = new Set();
+    const imageUrl = 'https://wiki.warframe.com/images/';
 
     useEffect(() => {
         fetch('https://api.warframestat.us/mods')
@@ -67,7 +68,7 @@ function ModsPage(){
                         return (
                             <div>
                                 <div key={mod.uniqueName} className="mods-containeritem" onClick={() => handleClickingDiv(mod)}>
-                                    <img src={mod.wikiaThumbnail ? mod.wikiaThumbnail.split('revision')[0] : null} alt={mod.name} />
+                                    <img src={mod.name ? `${imageUrl}${mod.name.split(' ').join('')}Mod.png` : null}/>
                                 </div>
                             </div>
                         );

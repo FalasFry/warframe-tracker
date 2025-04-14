@@ -107,8 +107,11 @@ function SearchPage(){
   }
 
   const addToWishlist = (item) => {
+    console.log(item);
     setWishlist([...wishlist, item]);
   }
+
+  const existInWishlist = new Set(wishlist.map(item => item.name));
 
   return (
     <>
@@ -125,8 +128,11 @@ function SearchPage(){
         <h1>Search</h1>
       </div>
       <div className="gridContainer">
-        {usefullData && usefullData.filter(item => searchCategory ? item.category.toLowerCase() === searchCategory.toLowerCase() : item)
-        .filter(item => item.name.toLowerCase().includes(searchData.toLowerCase())).map(item => {
+        {usefullData && usefullData
+        .filter(item => !existInWishlist.has(item.name))
+        .filter(item => searchCategory ? item.category.toLowerCase() === searchCategory.toLowerCase() : item)
+        .filter(item => item.name.toLowerCase().includes(searchData.toLowerCase()))
+        .map(item => {
           return(
             <div key={item.name+Math.random()} className="gridItem">
               <div className="content">

@@ -66,12 +66,12 @@ function Wishlist(){
 
       <div className="gridContainer">
         {wishlist.sort((a, b) => {
-            const nameA = a.category.toUpperCase(); // ignore upper and lowercase
-            const nameB = b.category.toUpperCase(); // ignore upper and lowercase
+            const nameA = a.category.toUpperCase();
+            const nameB = b.category.toUpperCase();
             if (nameA < nameB) {
               return -1;
             }
-            if (nameA > nameB) {
+            if (nameA >= nameB) {
               return 1;
             }
         }).filter(item => searchCategory ? item.category.toLowerCase() === searchCategory.toLowerCase() : item)
@@ -82,7 +82,7 @@ function Wishlist(){
               <div key={item.name+Math.random()} onClick={() => handleClickingDiv(item)}>
                 <div className="content">
                   {item.name}
-                  <p>{item.components.filter(i => i.done).length +' / '+item.components.length}</p>
+                  <p>{item.components ? item.components.filter(i => i.done).length +' / '+item.components.length : ''}</p>
                   <img src={item.name ? `${imageUrl}${item.name.split(' ').join('')}.png` : null}/>
                 </div>
               </div>
