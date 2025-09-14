@@ -1,6 +1,7 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import SimpleModal from "./components/SimpleModal";
+import FileOperations from "./components/FileOperations";
 
 function Wishlist(){
 
@@ -48,6 +49,15 @@ function Wishlist(){
     setWishlist(wishlist.map(item => item.name === clickedItem.name ? clickedItem : item));
     setIsModalOpen(false);
   };
+
+  const saveWishlist = () =>{
+    const fileOp = new FileOperations();
+    try {
+      fileOp.handleSaveData(wishlist, "wishlist");
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
   return(
     <>
@@ -62,6 +72,7 @@ function Wishlist(){
       </nav>
       <div>
         <h1>Wishlist</h1>
+        <button onClick={saveWishlist}>Save Wishlist</button>
       </div>
 
       <div className="gridContainer">

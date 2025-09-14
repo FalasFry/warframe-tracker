@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react"
 import Countdown from "./components/Countdown";
+import FissureDisplay from "./components/FissureDisplay";
 import './assets/worldState.css';
 
 function WorldState(){
@@ -13,6 +14,7 @@ function WorldState(){
         neo: false,
         axi: false
     });
+    const [showSteelPath, setShowSteelPath] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -35,7 +37,7 @@ function WorldState(){
     const toggleVisibility = (tier) => {
         setVisibleTiers(prevState => ({
             ...prevState,
-            [tier]: !prevState[tier]
+            [tier]: !prevState[tier],
         }));
     };
 
@@ -69,6 +71,7 @@ function WorldState(){
 
                 <div key='fissures' className="fissures-container">
                     <h3>Fissures</h3>
+                    <button onClick={() => {setShowSteelPath(!showSteelPath)}}>Toggle SteelPath</button>
                     {['lith', 'meso', 'neo', 'axi', 'requiem', 'omnia'].map(tier => (
                         <div key={tier} className="fissure-tier">
                             <div className="fissure-header" onClick={() => toggleVisibility(tier)}>
@@ -76,7 +79,7 @@ function WorldState(){
                                 <span>{visibleTiers[tier] ? '-' : '+'}</span>
                             </div>
                             <div className={`fissure-content ${visibleTiers[tier] ? 'show' : ''}`}>
-                                {worldState && <FissureDisplay worldState={worldState} tier={tier}/>}
+                                {worldState && <FissureDisplay worldState={worldState} tier={tier} enableSP={showSteelPath} />}
                             </div>
                         </div>
                     ))}
@@ -137,21 +140,6 @@ function WorldState(){
 }
 export default WorldState;
 
-function FissureDisplay({worldState, tier}) {
-    return worldState.fissures
-    .sort((a, b) => a.tierNum - b.tierNum)
-    .sort((a,b) => a.isHard - b.isHard)
-    .filter(fissure => fissure.tier.toLowerCase() === tier.toLowerCase())
-    .filter(fissure => fissure.isStorm === false)
-    .filter(fissure => fissure.expired === false)
-    .map(fissure => {
-        return (
-            <div key={fissure.id} className="fissure-item">
-                <div className="fissure-node">{fissure.node}</div>
-                <div className="fissure-mission">{fissure.missionType}</div>
-                <div className="fissure-mode">{`Steel Path: ${fissure.isHard}`}</div>
-                <Countdown targetDate={fissure.expiry} />
-            </div>
-        );
-    });
-}
+
+
+

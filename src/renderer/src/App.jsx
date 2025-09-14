@@ -43,7 +43,7 @@ function App() {
       const fileOp = new FileOperations();
       try {
         fileOp.handleSaveData(wishlist, "wishlist");
-        fileOp.handleSaveData(allData, "allData");
+        //fileOp.handleSaveData(allData, "allData");
       } catch (error) {
         console.error(error);
       }
