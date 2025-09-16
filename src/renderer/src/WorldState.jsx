@@ -47,7 +47,7 @@ function WorldState(){
                 <button onClick={() => navigate("/wishlist")}>Wishlist</button>
                 <button onClick={() => navigate("/search")}>Items</button>
                 <button onClick={() => navigate("/mods")}>Mods</button>
-                <button>Fishing Help</button>
+                <button onClick={() => navigate("/market")}>Market</button>
             </nav>
 
             <div className="state-container">

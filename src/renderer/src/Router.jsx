@@ -4,6 +4,7 @@ import Wishlist from "./Wishlist";
 import SearchPage from "./SearchPage";
 import WorldState from "./WorldState";
 import ModsPage from "./ModsPage";
+import MarketPage from "./MarketPage";
 
 const router = createHashRouter([
 {
@@ -29,6 +30,10 @@ const router = createHashRouter([
   {
     path: "mods",
     element: <ModsPage />
+  },
+  {
+    path: "market",
+    element: <MarketPage />
   }
 
 
