@@ -1,7 +1,5 @@
-require('./server.js');
-
 import { app, shell, BrowserWindow } from 'electron'
-import { path,join } from 'path'
+import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
