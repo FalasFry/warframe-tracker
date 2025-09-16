@@ -21,25 +21,24 @@ function MarketPage() {
       alert('Search submitted')
       fetch(`http://localhost:3001/api/market/${e.target.query.value.toLowerCase().replace(/ /g, '_')}/orders`)
       .then(response => response.json())
-      .then(data => setModsData(data))
+      .then(data => setModsData(data.payload.orders))
       .catch(error => console.log(error));
     }}>
       <input type='text' name="query" />
       <div>
-        {modsData && modsData.payload && modsData.payload.orders && modsData.payload.orders.map((order) => (
-          <div key={order.order_id} style={{border: '1px solid black', margin: '10px', padding: '10px'}}>
-            <p>Order ID: {order.order_id}</p>
-            <p>Item: {modsData.payload.item.item_name}</p>
-            <p>Platform: {order.platform}</p>
-            <p>Region: {order.region}</p>
-            <p>Order Type: {order.order_type}</p>
+        {modsData && 
+        modsData
+        .filter(order => order.user.status === 'ingame' && order.order_type === 'sell' && order.region === 'en')
+        .sort((a, b) => a.platinum - b.platinum)
+        .map((order) => (
+          <div key={order.id} style={{border: '1px solid black', margin: '10px', padding: '10px'}}>
+            <p>Name: {order.user.ingame_name}</p>
+            <p>Type: {order.order_type}</p>
             <p>Price: {order.platinum} Platinum</p>
-            <p>Quantity: {order.quantity}</p>
-            <p>Created: {new Date(order.creation_date).toLocaleString()}</p>
-            <p>Last Updated: {new Date(order.last_update).toLocaleString()}</p>
-            <p>Visible: {order.visible ? 'Yes' : 'No'}</p>
-            <p>Mod Rank: {order.mod_rank}</p>
-            <p>Seller: {order.user.ingame_name} (Reputation: {order.user.reputation})</p>
+            <button onClick={(e) => {
+              e.preventDefault()
+              navigator.clipboard.writeText(`/w ${order.user.ingame_name} Hi, I saw your ${order.item} listing on Warframe Tracker and I'm interested in buying it. Is it still available?`)
+              }}>Send Message</button>
           </div>
         ))}
       </div>

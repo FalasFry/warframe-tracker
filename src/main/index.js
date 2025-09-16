@@ -3,6 +3,8 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+import { startServer } from './server.js'; // Import the server start function
+
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -49,7 +51,7 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-
+  startServer(); // Start the Express server
   createWindow()
 
   app.on('activate', function () {
