@@ -80,8 +80,15 @@ function ModsPage(){
             onClose={closeModal}
             setClickedItem={setClickedItem}
             title={clickedItem ? clickedItem.name : ''}
-            data={clickedItem ? clickedItem.drops : ''} 
+            data={clickedItem ? clickedItem.drops : ''}
+            tradeable={clickedItem ? clickedItem.tradable : false} 
             type='mod'
+            onBuy={() => {
+                if (clickedItem) {
+                    navigate("/market", { state: { modName: clickedItem.name } });
+                    closeModal();
+                }
+            }}
         />
 
         </div>

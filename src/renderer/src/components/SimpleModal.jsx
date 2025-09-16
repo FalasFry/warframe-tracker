@@ -1,6 +1,7 @@
 import '../assets/modal.css';
+import { useNavigate } from 'react-router-dom';
 
-function SimpleModal({ setClickedItem, isOpen, onClose, title, data, type }){
+function SimpleModal({ setClickedItem, isOpen, onClose, title, data, type, tradeable ,onBuy}){
     if (!isOpen) return null;
 
     const handleCheckbox = (e, item) => {
@@ -12,11 +13,13 @@ function SimpleModal({ setClickedItem, isOpen, onClose, title, data, type }){
         )
       }));
     };
+
     return (
       <>
         <div className={`modal ${isOpen ? 'show' : ''}`} id="modal">
           <div className="modal-header">
             <div className="title">{title}</div>
+            {tradeable === true && onBuy && <button onClick={onBuy}>BUY</button>}
             <button className="close-button" onClick={onClose}>&times;</button>
           </div>
           <div className="modal-body">
